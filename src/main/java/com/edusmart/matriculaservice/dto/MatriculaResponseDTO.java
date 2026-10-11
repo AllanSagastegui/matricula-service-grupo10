@@ -1,25 +1,31 @@
 package com.edusmart.matriculaservice.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+public record MatriculaResponseDTO(
+        Long idMatricula,
+        String codigoMatricula,
+        LocalDateTime fechaMatricula,
+        Long estudianteId,
+        String periodoAcademico,
+        String estadoMatricula,
+        List<DetalleCursoMatriculadoDTO> listaCursosMatriculados,
+        Integer totalCreditosInscritos,
+        Double montoTotalPension
+) {
 
-public class MatriculaResponseDTO {
-    private Long idMatricula;
-    private String codigoMatricula;
-    private LocalDateTime fechaMatricula;
-    private Long estudianteId;
-    private String periodoAcademico;
-    private String estadoMatricula;
-    private List<DetalleCursoMatriculadoDTO> listaCursosMatriculados;
-    private Integer totalCreditosInscritos;
-    private Double montoTotalPension;
+    public MatriculaResponseDTO conEstado(String nuevoEstado) {
+        return new MatriculaResponseDTO(
+                idMatricula,
+                codigoMatricula,
+                fechaMatricula,
+                estudianteId,
+                periodoAcademico,
+                nuevoEstado,
+                listaCursosMatriculados,
+                totalCreditosInscritos,
+                montoTotalPension
+        );
+    }
 }
